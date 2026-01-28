@@ -1,200 +1,516 @@
-/* Reset & Base */
+/* =========================
+   Reset & Base
+========================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* =========================
+   Hero Section
+========================= */
+.hero {
+  min-height: 100vh;
+  background: black;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  inset: 0;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+/* =========================
+   Navbar
+========================= */
+/* .navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  transition: all 0.4s ease;
+} */
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 80px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 48px;
+  background: transparent;
+
+  transition: background 0.4s ease, padding 0.4s ease, border-radius 0.4s ease,
+    box-shadow 0.4s ease, width 0.4s ease;
+
+  z-index: 100;
+}
+
+/* Scrolled state */
+/* .navbar--scrolled {
+  background: rgba(79, 79, 79, 0.55);
+  backdrop-filter: blur(12px);
+  border-radius: 60px;
+  padding: 12px 24px;
+} */
+
+.navbar--scrolled {
+  top: 20px;
+  width: max-content;
+  position: sticky;
+
+  padding: 10px 16px;
+
+  background: rgba(79, 79, 79, 0.55);
+  backdrop-filter: blur(16px);
+
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* .navbar--scrolled .nav-links {
+  gap: 10px;
+} */
+
+.navbar--scrolled .cta-btn {
+  margin-left: 30px;
+}
+
+.logo-big {
+  font-size: 24px;
+  transition: font-size 0.4s ease;
+}
+
+.navbar--scrolled .logo-big {
+  font-size: 30px;
+}
+
+.navbar--scrolled .nav-links {
+  position: absolute;
+  top: 20px;
+  left: 140px;
+}
+
+.navbar--scrolled .logo {
+  margin-right: 500px;
+}
+
+.logo-small {
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-big {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.logo-small {
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  position: absolute;
+  left: 10px;
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  top: 10%;
+}
+
+.nav-links li {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #a855f7;
+}
+
+/* CTA */
+.cta-btn {
+  background: linear-gradient(100deg, #7c3aed, #a188c9);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   Hamburger (2 bars)
+========================= */
+.hamburger {
+  display: none; /* desktop pe hidden */
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 12px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+/* X animation
+.hamburger--open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+.hamburger--open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+} */
+
+/* scrolled state color */
+.navbar--scrolled .hamburger span {
+  background-color: #fff;
+}
+
+/* open animation */
+.hamburger--open span:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.hamburger--open span:nth-child(2) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* =========================
+   Hero Content
+========================= */
+.hero-content {
+  text-align: center;
+  padding-top: 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+/* Planet */
+.planet-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 60px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.planet {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, #c084fc, #7c3aed);
+}
+
+.planet-glow {
+  position: absolute;
+  inset: 0;
+  background: purple;
+  filter: blur(40px);
+  opacity: 0.4;
+}
+
+.planet-ring {
+  position: absolute;
+  width: 160px;
+  height: 30px;
+  border: 4px solid rgba(204, 191, 240, 0.5);
+  border-radius: 50%;
+  top: 45%;
+  left: -10px;
+  transform: rotateX(85deg);
+  animation: rotate 8s linear infinite;
+}
+
+/* =========================
+   Buttons
+========================= */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 16px 32px;
+  border-radius: 30px;
+}
+
+.primary-btn {
+  border: none;
+  font-weight: bold;
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+/* =========================
+   Chat Widget
+========================= */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.chat-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  font-size: 28px;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   Animations
+========================= */
+@keyframes float {
+  50% {
+    transform: translateY(-25px);
   }
-  
-  /* Hero Section */
-  .hero {
-    min-height: 100vh;
-    background: black;
-    color: white;
-    position: relative;
-    overflow: hidden;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotateX(75deg) rotateZ(360deg);
   }
-  
-  /* Stars */
-  .stars {
-    position: absolute;
-    inset: 0;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 44px;
   }
-  .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
+
+  .logo {
+    margin-left: 10px;
   }
-  
-  /* Navbar */
-  .navbar {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 80px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 48px;
-    transition: all 0.4s ease;
-    z-index: 100;
-    margin: 10px 20px 0;
+
+  .cta-btn {
+    margin-right: 10px;
   }
-  
-  .navbar--scrolled {
-    padding: 12px 32px;
-    background: rgba(79, 79, 79, 0.55);
-    position: fixed;
-    backdrop-filter: blur(12px);
-    border-radius: 60px;
-  }
-  
-  .logo-big {
-    font-size: 24px;
-    font-weight: bold;
-    transition: font-size 0.4s ease;
-  }
-  
-  .navbar--scrolled .logo-big,
-  .navbar--scrolled .logo-small {
-    margin-left: 50px;
-    transition: all 0.5s ease-in-out;
-  }
-  
-  .logo-small {
-    font-size: 12px;
-    opacity: 0.8;
-    letter-spacing: 2px;
-  }
-  
+}
+
+/* Mobile */
+@media (max-width: 825px) {
+  /* =========================
+   Mobile Hamburger Fix ONLY
+========================= */
+@media (max-width: 825px) {
   .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+
+    width: calc(100% - 40px);
+    max-width: 360px;
+
+    background: rgba(55, 55, 55, 0.95);
+    backdrop-filter: blur(16px);
+
+    border-radius: 18px;
+    padding: 20px 0;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    z-index: 1000;
   }
+
+  /* OPEN STATE */
+  .nav-links.nav-links--open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-links li {
+    font-size: 16px;
+    color: white;
+  }
+
   .nav-links li:hover {
     color: #a855f7;
-    cursor: pointer;
   }
-  
-  .cta-btn {
-    background: linear-gradient(100deg, #7c3aed, #a188c9);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-  .navbar--scrolled .cta-btn {
-    margin-right: 50px;
-    transition: all 0.5s ease-in-out;
-  }
-  
-  /* Hero Content */
-  .hero-content {
-    text-align: center;
-    padding-top: 120px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-content h1 {
-    font-size: 56px;
-    margin-bottom: 20px;
-  }
-  .hero-content p {
-    font-size: 18px;
-    opacity: 0.9;
-    margin-bottom: 40px;
-  }
-  
-  /* Planet */
-  .planet-wrapper {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 60px;
-    animation: float 4s ease-in-out infinite;
-  }
-  .planet {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle at top left, #c084fc, #7c3aed);
-  }
-  .planet-glow {
-    position: absolute;
-    inset: 0;
-    background: purple;
-    filter: blur(40px);
-    opacity: 0.4;
-  }
-  .planet-ring {
-    position: absolute;
-    width: 160px;
-    height: 30px;
-    border: 4px solid rgba(204, 191, 240, 0.5);
-    border-radius: 50%;
-    top: 45%;
-    left: -10px;
-    transform: rotateX(85deg);
-    animation: rotate 8s linear infinite;
-  }
-  
-  /* Hero Buttons */
-  .hero-buttons {
+}
+
+
+
+  .hamburger {
     display: flex;
-    justify-content: center;
-    gap: 16px;
+    /* margin-left: 12px; */
+    
   }
-  .primary-btn,
-  .secondary-btn {
-    padding: 16px 32px;
-    border-radius: 30px;
+
+  /* Order: Logo - CTA - Hamburger */
+  .logo {
+    order: 1;
   }
-  .primary-btn {
-    border: none;
-    font-weight: bold;
+
+  .cta-btn {
+    order: 2;
   }
-  .secondary-btn {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
+
+  .hamburger {
+    order: 3;
   }
-  
-  /* Chat Widget */
-  .chat-widget {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+
+  .navbar {
+    padding: 16px 20px;
   }
-  .chat-btn {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    border: none;
+
+  .navbar--scrolled {
+  top: 20px;
+  width: max-content;
+
+  padding: 10px 16px;
+
+  background: rgba(79, 79, 79, 0.55);
+  backdrop-filter: blur(16px);
+
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.navbar--scrolled .logo {
+  margin-right: 90px;
+}
+
+.navbar--scrolled .hamburger span{
+  color
+}
+}
+
+/* iPhone SE & small phones */
+@media (max-width: 450px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+
+  .logo-big {
+    font-size: 22px;
+  }
+
+  .logo-small {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+  }
+
+  .cta-btn {
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+
+  .hamburger span {
+    width: 22px;
+  }
+
+  .hero-content h1 {
     font-size: 28px;
-    background: linear-gradient(135deg, #7c3aed, #ec4899);
-    color: white;
-    cursor: pointer;
   }
-  .chat-box {
-    background: white;
-    color: black;
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-  
-  /* Animations */
-  @keyframes twinkle {
-    50% { opacity: 1; }
-  }
-  @keyframes float {
-    50% { transform: translateY(-25px); }
-  }
-  @keyframes rotate {
-    to { transform: rotateX(75deg) rotateZ(360deg); }
-  }
-  
+}
+
+.navbar {
+  transition: padding 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+.logo {
+  transition: transform 0.4s ease;
+}
+
+.cta-btn {
+  transition: transform 0.4s ease, padding 0.3s ease;
+}
+
+/* Navbar scroll animation */
+.navbar--scrolled .logo {
+  transform: translateX(20px);
+}
+
+.navbar--scrolled .cta-btn {
+  transform: translateX(-20px);
+}
