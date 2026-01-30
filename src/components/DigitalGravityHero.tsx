@@ -9,6 +9,19 @@ type Star = {
   animationDuration: number;
 };
 
+type Country = {
+  flag: string;
+  name: string;
+  code: string;
+  pattern: string;
+};
+
+type ChatMessage = {
+  type: 'user' | 'agent';
+  text: string;
+  time: string;
+};
+
 const DigitalGravityHero = (): JSX.Element => {
   /* ───── State ───── */
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -17,7 +30,11 @@ const DigitalGravityHero = (): JSX.Element => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
   const [showCountryCodes, setShowCountryCodes] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState({
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState<string>('');
+  const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [unreadMessages, setUnreadMessages] = useState<number>(0);
+  const [selectedCountry, setSelectedCountry] = useState<Country>({
     flag: "🇦🇪",
     name: "United Arab Emirates",
     code: "971",
@@ -26,8 +43,8 @@ const DigitalGravityHero = (): JSX.Element => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [countrySearch, setCountrySearch] = useState<string>("");
 
-  // Common countries for dropdown
-  const countries = [
+  /* ───── Countries Data ───── */
+  const countries: Country[] = [
     {
       flag: "🇦🇪",
       name: "United Arab Emirates",
@@ -49,16 +66,7 @@ const DigitalGravityHero = (): JSX.Element => {
     { flag: "🇲🇾", name: "Malaysia", code: "60", pattern: "xx-xxxx xxxx" },
   ];
 
-  // Filter countries based on search
-  const filteredCountries = countrySearch
-    ? countries.filter(
-        (country) =>
-          country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
-          country.code.includes(countrySearch)
-      )
-    : countries;
-
-  /* ───── Scroll Effect ───── */
+  /* ───── Effects ───── */
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -67,7 +75,6 @@ const DigitalGravityHero = (): JSX.Element => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ───── Stars Effect ───── */
   useEffect(() => {
     const newStars: Star[] = Array.from({ length: 150 }, () => ({
       x: Math.random() * 100,
@@ -79,11 +86,100 @@ const DigitalGravityHero = (): JSX.Element => {
     setStars(newStars);
   }, []);
 
-  /* ───── Handle Schedule Call ───── */
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const chatWidget = document.querySelector('.chat-widget');
+      if (chatOpen && chatWidget && !chatWidget.contains(event.target as Node)) {
+        setChatOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [chatOpen]);
+
+  /* ───── Filter Countries ───── */
+  const filteredCountries = countrySearch
+    ? countries.filter(
+        (country) =>
+          country.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
+          country.code.includes(countrySearch)
+      )
+    : countries;
+
+  /* ───── Chat Functions ───── */
+  const handleSendMessage = () => {
+    if (!chatInput.trim()) return;
+    
+    const userMessage: ChatMessage = {
+      type: 'user',
+      text: chatInput,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatInput('');
+    
+    setIsTyping(true);
+    setTimeout(() => {
+      const responses = [
+        "Thanks for your message! How can I help you further?",
+        "I understand. Our team will get back to you shortly.",
+        "Great question! Let me connect you with an expert.",
+        "I've noted your requirement. Would you like to schedule a call?"
+      ];
+      
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      
+      const agentMessage: ChatMessage = {
+        type: 'agent',
+        text: randomResponse,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      
+      setChatMessages(prev => [...prev, agentMessage]);
+      setIsTyping(false);
+      
+      if (!chatOpen) {
+        setUnreadMessages(prev => prev + 1);
+      }
+    }, 1500);
+  };
+
+  const handleQuickAction = (action: 'question' | 'quote' | 'schedule') => {
+    const messages = {
+      question: "I have a question about your services",
+      quote: "I'd like to get a quote for my project",
+      schedule: "I want to schedule a consultation call"
+    };
+    
+    setChatInput(messages[action]);
+    setTimeout(() => handleSendMessage(), 500);
+  };
+
+  /* ───── Event Handlers ───── */
   const handleScheduleCall = () => {
     setShowScheduleModal(true);
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Form submitted! We'll contact you soon.");
+    setShowScheduleModal(false);
+  };
+
+  const handleBudgetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    const displayValue = value > 100000
+      ? "AED 100K+"
+      : `AED ${value.toLocaleString()}`;
+    const budgetValueElement = document.getElementById("budgetValue");
+    if (budgetValueElement) {
+      budgetValueElement.textContent = `Current: ${displayValue}`;
+    }
+  };
+
+  /* ───── Render ───── */
   return (
     <div className="hero">
       {/* Stars */}
@@ -174,14 +270,7 @@ const DigitalGravityHero = (): JSX.Element => {
               This Could Be the Start of Something Incredible!
             </div>
 
-            <form
-              className="schedule-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Form submitted! We'll contact you soon.");
-                setShowScheduleModal(false);
-              }}
-            >
+            <form className="schedule-form" onSubmit={handleFormSubmit}>
               <div className="form-group">
                 <label>Name*</label>
                 <input type="text" placeholder="Your full name" required />
@@ -312,7 +401,6 @@ const DigitalGravityHero = (): JSX.Element => {
                 </select>
               </div>
 
-              {/* Budget Range */}
               <div className="budget-range">
                 <label>Budget Range*</label>
                 <div className="range-labels">
@@ -327,16 +415,7 @@ const DigitalGravityHero = (): JSX.Element => {
                   defaultValue="50000"
                   className="budget-slider"
                   id="budgetSlider"
-                  onChange={(e) => {
-                    const value = parseInt(e.target.value);
-                    const displayValue =
-                      value > 100000
-                        ? "AED 100K+"
-                        : `AED ${value.toLocaleString()}`;
-                    document.getElementById(
-                      "budgetValue"
-                    )!.textContent = `Current: ${displayValue}`;
-                  }}
+                  onChange={handleBudgetChange}
                 />
                 <div className="budget-value" id="budgetValue">
                   Current: AED 50,000
@@ -364,22 +443,102 @@ const DigitalGravityHero = (): JSX.Element => {
         </div>
       )}
 
-      {/* Chat */}
+      {/* Chat Widget */}
       <div className="chat-widget">
         {chatOpen && (
           <div className="chat-box">
-            <p>Welcome to Digital Gravity. We're here to help!</p>
-            <button>I have a question</button>
-            <button>Get a quote</button>
-            <button>Schedule consultation</button>
+            <div className="chat-header">
+              <div className="chat-avatar">
+                <div className="avatar-icon">💬</div>
+                <div className="chat-agent-info">
+                  <h4>Digital Gravity Assistant</h4>
+                  <span className="chat-status">Online</span>
+                </div>
+              </div>
+              <button 
+                className="chat-close"
+                onClick={() => setChatOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="chat-messages">
+              <div className="message agent">
+                <div className="message-content">
+                  Welcome to Digital Gravity! We're here to help. How can I assist you today?
+                </div>
+                <div className="message-time">Just now</div>
+              </div>
+              
+              {chatMessages.map((msg, index) => (
+                <div key={index} className={`message ${msg.type}`}>
+                  <div className="message-content">{msg.text}</div>
+                  <div className="message-time">{msg.time}</div>
+                </div>
+              ))}
+              
+              {isTyping && (
+                <div className="message agent typing">
+                  <div className="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            <div className="chat-actions">
+              <button 
+                className="chat-action-btn"
+                onClick={() => handleQuickAction('question')}
+              >
+                💭 I have a question
+              </button>
+              <button 
+                className="chat-action-btn"
+                onClick={() => handleQuickAction('quote')}
+              >
+                💰 Get a quote
+              </button>
+              <button 
+                className="chat-action-btn"
+                onClick={() => handleQuickAction('schedule')}
+              >
+                📅 Schedule consultation
+              </button>
+            </div>
+            
+            <div className="chat-input-container">
+              <input
+                type="text"
+                className="chat-input"
+                placeholder="Type your message..."
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              />
+              <button 
+                className="chat-send-btn"
+                onClick={handleSendMessage}
+                disabled={!chatInput.trim()}
+              >
+                ➤
+              </button>
+            </div>
           </div>
         )}
 
         <button
           className="chat-btn"
-          onClick={() => setChatOpen((prev) => !prev)}
+          onClick={() => setChatOpen(prev => !prev)}
+          aria-label="Open chat"
         >
           {chatOpen ? "✕" : "💬"}
+          {unreadMessages > 0 && (
+            <span className="chat-badge">{unreadMessages}</span>
+          )}
         </button>
       </div>
     </div>
