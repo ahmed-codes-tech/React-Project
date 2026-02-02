@@ -17,7 +17,7 @@ type Country = {
 };
 
 type ChatMessage = {
-  type: 'user' | 'agent';
+  type: "user" | "agent";
   text: string;
   time: string;
 };
@@ -31,7 +31,7 @@ const DigitalGravityHero = (): JSX.Element => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
   const [showCountryCodes, setShowCountryCodes] = useState<boolean>(false);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [chatInput, setChatInput] = useState<string>('');
+  const [chatInput, setChatInput] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [unreadMessages, setUnreadMessages] = useState<number>(0);
   const [selectedCountry, setSelectedCountry] = useState<Country>({
@@ -88,14 +88,18 @@ const DigitalGravityHero = (): JSX.Element => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const chatWidget = document.querySelector('.chat-widget');
-      if (chatOpen && chatWidget && !chatWidget.contains(event.target as Node)) {
+      const chatWidget = document.querySelector(".chat-widget");
+      if (
+        chatOpen &&
+        chatWidget &&
+        !chatWidget.contains(event.target as Node)
+      ) {
         setChatOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [chatOpen]);
 
   /* ───── Filter Countries ───── */
@@ -110,49 +114,56 @@ const DigitalGravityHero = (): JSX.Element => {
   /* ───── Chat Functions ───── */
   const handleSendMessage = () => {
     if (!chatInput.trim()) return;
-    
+
     const userMessage: ChatMessage = {
-      type: 'user',
+      type: "user",
       text: chatInput,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
     };
-    
-    setChatMessages(prev => [...prev, userMessage]);
-    setChatInput('');
-    
+
+    setChatMessages((prev) => [...prev, userMessage]);
+    setChatInput("");
+
     setIsTyping(true);
     setTimeout(() => {
       const responses = [
         "Thanks for your message! How can I help you further?",
         "I understand. Our team will get back to you shortly.",
         "Great question! Let me connect you with an expert.",
-        "I've noted your requirement. Would you like to schedule a call?"
+        "I've noted your requirement. Would you like to schedule a call?",
       ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
+
+      const randomResponse =
+        responses[Math.floor(Math.random() * responses.length)];
+
       const agentMessage: ChatMessage = {
-        type: 'agent',
+        type: "agent",
         text: randomResponse,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
-      
-      setChatMessages(prev => [...prev, agentMessage]);
+
+      setChatMessages((prev) => [...prev, agentMessage]);
       setIsTyping(false);
-      
+
       if (!chatOpen) {
-        setUnreadMessages(prev => prev + 1);
+        setUnreadMessages((prev) => prev + 1);
       }
     }, 1500);
   };
 
-  const handleQuickAction = (action: 'question' | 'quote' | 'schedule') => {
+  const handleQuickAction = (action: "question" | "quote" | "schedule") => {
     const messages = {
       question: "I have a question about your services",
       quote: "I'd like to get a quote for my project",
-      schedule: "I want to schedule a consultation call"
+      schedule: "I want to schedule a consultation call",
     };
-    
+
     setChatInput(messages[action]);
     setTimeout(() => handleSendMessage(), 500);
   };
@@ -170,9 +181,8 @@ const DigitalGravityHero = (): JSX.Element => {
 
   const handleBudgetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    const displayValue = value > 100000
-      ? "AED 100K+"
-      : `AED ${value.toLocaleString()}`;
+    const displayValue =
+      value > 100000 ? "AED 100K+" : `AED ${value.toLocaleString()}`;
     const budgetValueElement = document.getElementById("budgetValue");
     if (budgetValueElement) {
       budgetValueElement.textContent = `Current: ${displayValue}`;
@@ -208,12 +218,24 @@ const DigitalGravityHero = (): JSX.Element => {
         </div>
 
         <ul className={`nav-links ${menuOpen ? "nav-links--open" : ""}`}>
-          <li onClick={() => setMenuOpen(false)}>Services</li>
-          <li onClick={() => setMenuOpen(false)}>Industry</li>
-          <li onClick={() => setMenuOpen(false)}>Our Work</li>
-          <li onClick={() => setMenuOpen(false)}>About</li>
-          <li onClick={() => setMenuOpen(false)}>Blog</li>
-          <li onClick={() => setMenuOpen(false)}>Career</li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            Services
+          </li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            Industry
+          </li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            Our Work
+          </li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            About
+          </li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            Blog
+          </li>
+          <li onClick={() => setMenuOpen(false)} className="nav-items">
+            Career
+          </li>
         </ul>
 
         <button className="cta-btn">Speak to an expert ✉ 📞</button>
@@ -248,6 +270,60 @@ const DigitalGravityHero = (): JSX.Element => {
           <button className="secondary-btn">See our work</button>
         </div>
       </div>
+
+      {/* What We Do Section */}
+      <section className="what-we-do-section">
+        <div className="section-badge">
+          <span className="badge-dot"></span>
+          What We Do
+        </div>
+
+        <h2 className="section-title">
+          Fueled Up 500+ Brands to
+          <br />
+          Roar with Next-GenTech
+        </h2>
+
+        <div className="planet-scene">
+          <div className="planet-earth-wrapper">
+            <div className="planet-earth">
+              {/* Update this path based on your project structure */}
+              <img src="src\assets\earth-bg.png" alt="Earth" className="earth-image" />
+            </div>
+          </div>
+
+          {/* Brand logos overlaying through planet */}
+          <div className="brand-logos-overlay">
+            <div className="brand-logos-track">
+              <div className="logo-item">arabianpost</div>
+              <div className="logo-item">ALJAZEERA</div>
+              <div className="logo-item">ZAWYA</div>
+              <div className="logo-item">GULF NEWS</div>
+              <div className="logo-item">Khaleej Times</div>
+              {/* Duplicate for seamless loop */}
+              <div className="logo-item">arabianpost</div>
+              <div className="logo-item">ALJAZEERA</div>
+              <div className="logo-item">ZAWYA</div>
+              <div className="logo-item">GULF NEWS</div>
+              <div className="logo-item">Khaleej Times</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="global-presence">
+          <span className="presence-label">Our Global Presence</span>
+          <div className="presence-locations">
+            <span className="location-dot"></span>
+            <span className="location-text">USA</span>
+            <span className="location-dot"></span>
+            <span className="location-text">UAE</span>
+            <span className="location-dot"></span>
+            <span className="location-text">Saudi Arabia</span>
+            <span className="location-dot"></span>
+            <span className="location-text">Pakistan</span>
+          </div>
+        </div>
+      </section>
 
       {/* Schedule Modal */}
       {showScheduleModal && (
@@ -455,29 +531,27 @@ const DigitalGravityHero = (): JSX.Element => {
                   <span className="chat-status">Online</span>
                 </div>
               </div>
-              <button 
-                className="chat-close"
-                onClick={() => setChatOpen(false)}
-              >
+              <button className="chat-close" onClick={() => setChatOpen(false)}>
                 ✕
               </button>
             </div>
-            
+
             <div className="chat-messages">
               <div className="message agent">
                 <div className="message-content">
-                  Welcome to Digital Gravity! We're here to help. How can I assist you today?
+                  Welcome to Digital Gravity! We're here to help. How can I
+                  assist you today?
                 </div>
                 <div className="message-time">Just now</div>
               </div>
-              
+
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`message ${msg.type}`}>
                   <div className="message-content">{msg.text}</div>
                   <div className="message-time">{msg.time}</div>
                 </div>
               ))}
-              
+
               {isTyping && (
                 <div className="message agent typing">
                   <div className="typing-indicator">
@@ -488,28 +562,28 @@ const DigitalGravityHero = (): JSX.Element => {
                 </div>
               )}
             </div>
-            
+
             <div className="chat-actions">
-              <button 
+              <button
                 className="chat-action-btn"
-                onClick={() => handleQuickAction('question')}
+                onClick={() => handleQuickAction("question")}
               >
                 💭 I have a question
               </button>
-              <button 
+              <button
                 className="chat-action-btn"
-                onClick={() => handleQuickAction('quote')}
+                onClick={() => handleQuickAction("quote")}
               >
                 💰 Get a quote
               </button>
-              <button 
+              <button
                 className="chat-action-btn"
-                onClick={() => handleQuickAction('schedule')}
+                onClick={() => handleQuickAction("schedule")}
               >
                 📅 Schedule consultation
               </button>
             </div>
-            
+
             <div className="chat-input-container">
               <input
                 type="text"
@@ -517,9 +591,9 @@ const DigitalGravityHero = (): JSX.Element => {
                 placeholder="Type your message..."
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               />
-              <button 
+              <button
                 className="chat-send-btn"
                 onClick={handleSendMessage}
                 disabled={!chatInput.trim()}
@@ -532,7 +606,7 @@ const DigitalGravityHero = (): JSX.Element => {
 
         <button
           className="chat-btn"
-          onClick={() => setChatOpen(prev => !prev)}
+          onClick={() => setChatOpen((prev) => !prev)}
           aria-label="Open chat"
         >
           {chatOpen ? "✕" : "💬"}
