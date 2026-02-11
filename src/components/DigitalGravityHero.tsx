@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import earthImg from "../assets/earth-bg.png";
+import astronoutImg from "../assets/bg-astrounout.png";
 // then use <img src={earthImg} />
 import "./DigitalGravity.css";
 
@@ -519,6 +520,7 @@ const DigitalGravityHero = (): JSX.Element => {
 
   /* ───── Render ───── */
   return (
+    <>
     <div className="hero">
       {/* Stars */}
       <div className="stars">
@@ -1229,6 +1231,57 @@ const DigitalGravityHero = (): JSX.Element => {
           </button>
         </div>
 
+         {/* =====================================================
+          ASTRONAUT SECTION
+      ===================================================== */}
+      <section className="astronout-section">
+
+{/* Purple grid lines */}
+<div className="astronout-grid" />
+
+{/* Ambient fog blobs */}
+<div className="astronout-fog-left" />
+<div className="astronout-fog-right" />
+
+{/* ── Full-bleed astronaut image — absolute center ── */}
+<div className="astronout-img-wrap">
+  <div className="astronout-planet-glow" />
+  <div className="astronout-planet-ring" />
+  <img
+    src={astronoutImg}
+    alt="Astronaut on glowing planet"
+    className="astronout-img"
+  />
+</div>
+
+{/* ── LEFT overlay: Large heading ── */}
+<div className="astronout-left">
+  <h2 className="astronout-heading">
+    <span className="astronout-line1">Digital Gravity's</span>
+    <span className="astronout-line2">Tech Nerds</span>
+    <span className="astronout-line3">are here</span>
+  </h2>
+</div>
+
+{/* ── RIGHT overlay: Copy + CTA ── */}
+<div className="astronout-right">
+  <p className="astronout-body">
+    Client satisfaction is one of our top priorities. At Digital
+    Gravity, our consistency, dedication towards work, and continuous
+    drive for innovation have won us several accolades.
+  </p>
+  <p className="astronout-body">
+    Hire web designers and web developers at Digital Gravity to build
+    highly responsive, scalable, and feature-rich websites and
+    applications with a touch of finesse.
+  </p>
+  <button className="astronout-cta" onClick={handleScheduleCall}>
+    Start A Project
+  </button>
+</div>
+
+</section>
+
         {/* Social Icons - Right Side */}
         <div className="faq-social-icons">
           <a href="#" className="faq-social-icon" aria-label="LinkedIn">
@@ -1560,6 +1613,129 @@ const DigitalGravityHero = (): JSX.Element => {
         </button>
       </div>
     </div>
+    
+        {/* =====================================================
+          FOOTER SECTION (OUTSIDE THE HERO DIV)
+      ===================================================== */}
+      <footer className="dg-footer">
+        <div className="footer-container">
+
+          {/* ── Brand Area: Logo + Social Icons ── */}
+          <div className="footer-brand">
+            <div className="footer-logo">
+              <span className="footer-logo-small">digital</span>
+              <span className="footer-logo-big">gravity</span>
+            </div>
+
+            <div className="footer-social-icons">
+              <a href="#" aria-label="Facebook" className="footer-social-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram" className="footer-social-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="YouTube" className="footer-social-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" className="footer-social-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Behance" className="footer-social-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11.987h3.813c2.171 0 2.171-3.389 0-3.389H3v3.389zm0 5.014h4.937c2.509 0 2.509-3.895 0-3.895H3v3.895z"/>
+                </svg>
+              </a>
+            </div>
+
+            <div className="footer-divider" />
+          </div>
+
+          {/* ── 5-Column Footer Layout ── */}
+          <div className="footer-columns">
+
+            {/* Column 1: Contact Us */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Contact Us</h3>
+              <div className="footer-column-content">
+                <p>Office M-13, The Curve Building, Sheikh Zayed Road, Dubai, UAE</p>
+                <p>discover@digitalgravity.ae</p>
+                <p>+971 4 242 1375</p>
+                <p>+971 4 834 6571</p>
+              </div>
+            </div>
+
+            {/* Column 2: Overview */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Overview</h3>
+              <ul className="footer-column-list">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#work">Our Work</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact us</a></li>
+                <li><a href="#career">Career</a></li>
+              </ul>
+            </div>
+
+            {/* Column 3: Smart Technology Solutions */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Smart Technology Solutions</h3>
+              <ul className="footer-column-list">
+                <li><a href="#web-dev">Web Development</a></li>
+                <li><a href="#uiux">UI/UX Design</a></li>
+                <li><a href="#ecommerce">Ecommerce Web Development</a></li>
+                <li><a href="#mobile">Mobile App Development</a></li>
+                <li><a href="#ai">Artificial Intelligence</a></li>
+                <li><a href="#chatbot">Chatbot Development</a></li>
+                <li><a href="#vr">Virtual Reality Development</a></li>
+                <li><a href="#ar">Augmented Reality Development</a></li>
+              </ul>
+            </div>
+
+            {/* Column 4: Digital Growth & Marketing */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Digital Growth & Marketing</h3>
+              <ul className="footer-column-list">
+                <li><a href="#digital-marketing">Digital Marketing</a></li>
+                <li><a href="#seo">Search Engine Optimization (SEO)</a></li>
+                <li><a href="#geo">Generative Engine Optimization (GEO)</a></li>
+                <li><a href="#ppc">Pay-Per-Click Advertising (PPC)</a></li>
+                <li><a href="#smm">Social Media Marketing</a></li>
+                <li><a href="#influencer">Influencer Marketing</a></li>
+                <li><a href="#branding">Branding & Creative Design</a></li>
+              </ul>
+            </div>
+
+            {/* Column 5: Industry */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Industry</h3>
+              <ul className="footer-column-list">
+                <li><a href="#real-estate">Real Estate</a></li>
+                <li><a href="#government">Government</a></li>
+                <li><a href="#healthcare">Healthcare</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#hospitality">Hospitality</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* Large "gravity" watermark text at bottom */}
+          <div className="footer-watermark" aria-hidden="true">
+            @DIGITALGRAVITY
+          </div>
+
+        </div>
+      </footer>
+    </>
   );
 };
 
