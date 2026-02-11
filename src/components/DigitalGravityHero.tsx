@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import earthImg from "../assets/earth-bg.png";
 import astronoutImg from "../assets/bg-astrounout.png";
-// then use <img src={earthImg} />
 import "./DigitalGravity.css";
 
 type Star = {
@@ -1225,11 +1224,11 @@ const DigitalGravityHero = (): JSX.Element => {
         </div>
 
         {/* "Get A Quote" Fixed Button */}
-        <div className="faq-fixed-button">
+        {/* <div className="faq-fixed-button">
           <button className="get-a-quote-btn">
             Get A Quote
           </button>
-        </div>
+        </div> */} 
 
          {/* =====================================================
           ASTRONAUT SECTION
@@ -1283,7 +1282,7 @@ const DigitalGravityHero = (): JSX.Element => {
 </section>
 
         {/* Social Icons - Right Side */}
-        <div className="faq-social-icons">
+        {/* <div className="faq-social-icons">
           <a href="#" className="faq-social-icon" aria-label="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
@@ -1319,7 +1318,7 @@ const DigitalGravityHero = (): JSX.Element => {
               <path d="M20 22.621l-3.521-6.795c-.008.004-1.974.97-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l2.083-1.026-3.493-6.817-2.106 1.039c-7.202 3.755 4.233 25.982 11.6 22.615.121-.055 2.102-1.029 2.11-1.033z"/>
             </svg>
           </a>
-        </div>
+        </div> */}
       </section>
       
       {/* Schedule Modal */}
