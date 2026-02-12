@@ -4479,6 +4479,11 @@ body {
     padding: 12px 15px;
   }
 
+  .navbar .hamburger {
+    position: relative;
+    margin-left: 0;
+  }
+
   .navbar.navbar--scrolled {
     top: 10px;
     max-width: calc(100% - 20px);
@@ -4487,7 +4492,7 @@ body {
 
   .navbar--scrolled .logo {
     position: relative;
-    left: -10px;
+    left: -20px;
   }
 
   .navbar--scrolled .logo-small {
