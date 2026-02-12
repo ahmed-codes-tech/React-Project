@@ -4485,6 +4485,11 @@ body {
     padding: 8px 12px;
   }
 
+  .navbar--scrolled .logo {
+    position: relative;
+    
+  }
+
   .navbar--scrolled .logo-small {
     font-size: 13px;
     line-height: 1;
