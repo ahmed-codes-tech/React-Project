@@ -4490,6 +4490,13 @@ body {
     padding: 3px 12px;
   }
 
+  .navbar--scrolled .cta-btn {
+    position: relative;
+    width: 170px;
+    left: 110px;
+  }
+  
+
   .navbar--scrolled .logo {
     position: relative;
     left: -20px;

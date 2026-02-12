@@ -602,7 +602,7 @@ const DigitalGravityHero = (): JSX.Element => {
           </li>
         </ul>
 
-        <button className="cta-btn">Speak to an expert ✉ 📞</button>
+        <button className="cta-btn">Speak to an expert 📞</button>
 
         <button
           className={`hamburger ${menuOpen ? "hamburger--open" : ""}`}
