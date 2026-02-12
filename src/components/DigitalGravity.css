@@ -4487,7 +4487,7 @@ body {
   .navbar.navbar--scrolled {
     top: 10px;
     max-width: calc(100% - 20px);
-    padding: 8px 12px;
+    padding: 3px 12px;
   }
 
   .navbar--scrolled .logo {
