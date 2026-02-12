@@ -4492,7 +4492,7 @@ body {
 
   .navbar--scrolled .cta-btn {
     position: relative;
-    width: 170px;
+    width: 160px;
     left: 110px;
   }
   
@@ -4505,6 +4505,7 @@ body {
   .navbar--scrolled .logo-small {
     font-size: 13px;
     line-height: 1;
+    margin-left: 0;
   }
 
   .navbar--scrolled .logo-big {
