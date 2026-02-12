@@ -4487,7 +4487,7 @@ body {
 
   .navbar--scrolled .logo {
     position: relative;
-    left: 0px;
+    left: -10px;
   }
 
   .navbar--scrolled .logo-small {
