@@ -2558,7 +2558,7 @@ body {
 
   .brand-logos-overlay .logo-item {
     font-size: 12px;
-    min-width: 100px;
+    min-width: 10px;
   }
 
   .global-presence {
@@ -2569,6 +2569,10 @@ body {
 
   .presence-label {
     opacity: 0.9;
+  }
+
+  .presence-locations {
+    margin-left: 30px;
   }
 
   .location-text {
