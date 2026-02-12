@@ -350,6 +350,37 @@ const DigitalGravityHero = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+  
+    const handleScroll = () => {
+      lastScrollY = window.scrollY;
+  
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(lastScrollY > 50); // Increase threshold for better UX
+          
+          // Your other scroll logic here...
+          if (innovationsSectionRef.current) {
+            const rect = innovationsSectionRef.current.getBoundingClientRect();
+            const isInView = rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
+            setShowSideButtons(isInView);
+          }
+  
+          ticking = false;
+        });
+  
+        ticking = true;
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
+  
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     const newStars: Star[] = Array.from({ length: 150 }, () => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
